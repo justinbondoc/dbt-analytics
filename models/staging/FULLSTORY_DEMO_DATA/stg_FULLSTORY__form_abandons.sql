@@ -10,9 +10,10 @@ renamed as (
 
     select
         event_id,
+        event_time,
         user_id,
         view_id,
-        target_raw_selector as form_raw_selector,
+        target_raw_selector
 
     from source
 

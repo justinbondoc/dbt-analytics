@@ -11,7 +11,7 @@ renamed as (
     select
         id as user_id,
         user_display_name,
-        user_email,
+        user_email
         
     from source
 

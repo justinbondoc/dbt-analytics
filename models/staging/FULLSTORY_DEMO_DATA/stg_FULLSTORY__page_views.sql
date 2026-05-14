@@ -13,7 +13,7 @@ renamed as (
         event_time,
         user_id,
         view_id,
-        page_name,
+        page_name
 
     from source
 
