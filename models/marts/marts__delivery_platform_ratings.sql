@@ -6,8 +6,8 @@ with delivery_platforms as (
 
     from {{ ref('stg_V02__technologies') }}
 
-    where technology_category = 'Delivery'
-      and technology_subcategory = 'Marketplace'
+    -- where technology_category = 'Delivery'
+    --   and technology_subcategory = 'Marketplace'
 
 ),
 
