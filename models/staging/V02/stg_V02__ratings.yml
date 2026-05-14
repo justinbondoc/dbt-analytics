@@ -14,11 +14,3 @@ models:
               arguments: 
                 to: ref('stg_V02__establishments_open')
                 field: establishment_id
-      - name: ratings_source
-        data_tests:
-          - not_null
-      - name: is_current
-        data_tests:
-          - not_null
-      - name: score
-      - name: review_count

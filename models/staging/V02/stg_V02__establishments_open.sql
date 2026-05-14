@@ -7,14 +7,14 @@ renamed as (
     select
         establishment_id,
         name as establishment_name,
-        location_city,
-        location_state_code,
-        location_country_code,
-        location_metro_area,
-        chain_name,
-        business_types,
-        cuisines_regional,
-        price_symbolic as price_rating
+        score as establishment_score,
+        location_city as establishment_location_city,
+        location_state_code as establishment_location_state_code,
+        location_country_code as establishment_location_country_code,
+        location_metro_area as establishment_location_metro_area,
+        chain_name as establishment_chain_name,
+        review_count as establishment_review_count,
+        price_symbolic as establishment_price_rating
     from source
 )
 
