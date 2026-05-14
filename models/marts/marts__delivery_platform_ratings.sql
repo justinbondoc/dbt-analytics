@@ -15,7 +15,7 @@ establishments as (
 
     select
         establishment_id,
-        establishment_location_country_code,
+        establishment_country_code,
         establishment_score,
         establishment_review_count
 
@@ -27,7 +27,7 @@ joined as (
 
     select
         dp.delivery_platform,
-        e.establishment_location_country_code,
+        e.establishment_country_code,
         e.establishment_id,
         e.establishment_score,
         e.establishment_review_count
@@ -42,14 +42,14 @@ final as (
 
     select
         delivery_platform,
-        establishment_location_country_code,
+        establishment_country_code,
         count(distinct establishment_id)        as establishment_count,
         round(avg(establishment_score), 2)      as avg_rating_score,
         sum(establishment_review_count)         as total_review_count
 
     from joined
 
-    where establishment_location_country_code is not null
+    where establishment_country_code is not null
 
     group by 1, 2
 
