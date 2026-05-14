@@ -6,9 +6,7 @@ with delivery_platforms as (
 
     from {{ ref('stg_V02__technologies') }}
 
-    -- where technology_category = 'Delivery'
-    --   and technology_subcategory = 'Marketplace'
-
+    where technology_category = 'Delivery'
 ),
 
 establishments as (
@@ -43,9 +41,9 @@ final as (
     select
         delivery_platform,
         establishment_country_code,
-        count(distinct establishment_id)        as establishment_count,
-        round(avg(establishment_score), 2)      as avg_rating_score,
-        sum(establishment_review_count)         as total_review_count
+        count(distinct establishment_id) as establishment_count,
+        round(avg(establishment_score), 2) as avg_rating_score,
+        sum(establishment_review_count) as total_review_count
 
     from joined
 
@@ -56,4 +54,4 @@ final as (
 )
 
 select * from final
-order by 1, 2
+order by delivery_platform, establishment_country_code
