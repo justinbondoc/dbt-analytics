@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: establishments_open
+    description: "Active business establishments filtered from raw source"
+
+  - name: technologies
+    description: "Technology records from raw source"
