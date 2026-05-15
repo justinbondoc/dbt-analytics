@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('v02', 'menu_items') }}
+    select * from {{ source('V02', 'menu_items') }}
 
 ),
 
@@ -13,9 +13,12 @@ renamed as (
         establishment_id,
         menu_id,
         name as menu_item_name,
+        description,
+        price,
+        is_current
 
     from source
-    where is_current = 'true' --Removes any duplicate items
+
 )
 
 select * from renamed

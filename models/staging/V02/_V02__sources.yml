@@ -1,367 +1,74 @@
 version: 2
 
 sources:
-  - name: v02
+  - name: V02
     database: food__beverage_establishment__menu_data
+    description: A sample of food and beverage data from Snowflake with some reliable data.
     tables:
-      - name: contacts
+      - name: establishments_open
+        description: "Open restaurant and business listings. Core fields are reliable. Cuisine and pricing have partial coverage."
         columns:
-          - name: unique_id
-            data_type: varchar
-          - name: contact_id
-            data_type: varchar
           - name: establishment_id
-            data_type: varchar
-          - name: location
-            data_type: varchar
+            data_tests:
+              - not_null
+              - unique
           - name: name
-            data_type: varchar
-          - name: first_name
-            data_type: varchar
-          - name: last_name
-            data_type: varchar
-          - name: title
-            data_type: varchar
-          - name: role
-            data_type: varchar
-          - name: level
-            data_type: varchar
-          - name: first_seen
-            data_type: varchar
-          - name: last_seen
-            data_type: varchar
-          - name: company_name
-            data_type: varchar
-          - name: company_location
-            data_type: variant
-          - name: is_current
-            data_type: boolean
-          - name: phone
-            data_type: varchar
-          - name: email
-            data_type: varchar
-          - name: email_type
-            data_type: varchar
-          - name: email_test_result
-            data_type: varchar
-          - name: email_test_date
-            data_type: date
-          - name: linkedin
-            data_type: varchar
-          - name: records
-            data_type: variant
+            data_tests:
+              - not_null
+          - name: status
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['open']
 
-      - name: entities
-        columns:
-          - name: entity_id
-            data_type: varchar
-          - name: menu_item_id
-            data_type: varchar
-          - name: type
-            data_type: varchar
-          - name: category
-            data_type: varchar
-          - name: subcategory
-            data_type: varchar
-          - name: name
-            data_type: varchar
-          - name: variant
-            data_type: variant
-          - name: score
-            data_type: number
-          - name: matches
-            data_type: variant
+
 
       - name: establishments_closed
+        description: "Closed restaurant and business listings."
         columns:
           - name: establishment_id
-            data_type: varchar
-          - name: updated
-            data_type: timestamp_ntz
-          - name: md5
-            data_type: varchar
+            data_tests:
+              - not_null
+              - unique
           - name: status
-            data_type: varchar
-          - name: first_seen
-            data_type: date
-          - name: closed_date
-            data_type: date
-          - name: name
-            data_type: varchar
-          - name: alternate_name
-            data_type: varchar
-          - name: location_street
-            data_type: varchar
-          - name: location_unit
-            data_type: varchar
-          - name: location_city
-            data_type: varchar
-          - name: location_state_code
-            data_type: varchar
-          - name: location_zip
-            data_type: varchar
-          - name: location_country_code
-            data_type: varchar
-          - name: parent_name
-            data_type: varchar
-          - name: chain_id
-            data_type: varchar
-          - name: chain_name
-            data_type: varchar
-          - name: chain_url
-            data_type: varchar
-          - name: website
-            data_type: varchar
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['temporarily closed', 'possibly closed', 'permanently closed']
 
-      - name: establishments_open
-        columns:
-          - name: establishment_id
-            data_type: varchar
-          - name: updated
-            data_type: timestamp_ntz
-          - name: md5
-            data_type: varchar
-          - name: link
-            data_type: varchar
-          - name: status
-            data_type: varchar
-          - name: first_seen
-            data_type: date
-          - name: name
-            data_type: varchar
-          - name: alternate_name
-            data_type: varchar
-          - name: location_street
-            data_type: varchar
-          - name: location_unit
-            data_type: varchar
-          - name: location_city
-            data_type: varchar
-          - name: location_state_code
-            data_type: varchar
-          - name: location_zip
-            data_type: varchar
-          - name: location_country_code
-            data_type: varchar
-          - name: location_metro_area
-            data_type: varchar
-          - name: location_county
-            data_type: varchar
-          - name: location_latitude
-            data_type: float
-          - name: location_longitude
-            data_type: float
-          - name: location_located_in_name
-            data_type: varchar
-          - name: location_located_in_location_address
-            data_type: variant
-          - name: location_located_in_business_type
-            data_type: varchar
-          - name: foot_traffic_history_by_month
-            data_type: variant
-          - name: foot_traffic_latest_month
-            data_type: variant
-          - name: timezone_name
-            data_type: varchar
-          - name: timezone_utc
-            data_type: varchar
-          - name: timezone_dst
-            data_type: varchar
-          - name: location_density_0m
-            data_type: number
-          - name: location_density_5mi
-            data_type: number
-          - name: location_density_100m
-            data_type: number
-          - name: parent_name
-            data_type: varchar
-          - name: parent_url
-            data_type: varchar
-          - name: franchisee_name
-            data_type: varchar
-          - name: franchisee_location
-            data_type: variant
-          - name: franchisor_name
-            data_type: varchar
-          - name: franchisor_location
-            data_type: variant
-          - name: chain_id
-            data_type: varchar
-          - name: chain_name
-            data_type: varchar
-          - name: chain_location
-            data_type: variant
-          - name: chain_country_code
-            data_type: varchar
-          - name: chain_url
-            data_type: varchar
-          - name: chain_nationwide_locations
-            data_type: number
-          - name: established
-            data_type: number
-          - name: business_types
-            data_type: varchar
-          - name: hours_open
-            data_type: varchar
-          - name: amenities
-            data_type: varchar
-          - name: ambiances
-            data_type: varchar
-          - name: website
-            data_type: varchar
-          - name: website_status
-            data_type: varchar
-          - name: website_traffic
-            data_type: number
-          - name: website_traffic_history
-            data_type: variant
-          - name: referrals_google_delivery
-            data_type: varchar
-          - name: referrals_google_ordering
-            data_type: varchar
-          - name: price_symbolic
-            data_type: varchar
-          - name: price_pctl_20
-            data_type: number
-          - name: price_pctl_80
-            data_type: number
-          - name: price_median
-            data_type: number
-          - name: cuisines_continental
-            data_type: varchar
-          - name: cuisines_regional
-            data_type: varchar
-          - name: meals
-            data_type: varchar
-          - name: diets
-            data_type: varchar
-          - name: dishes
-            data_type: varchar
-          - name: beverages
-            data_type: varchar
-          - name: score
-            data_type: float
-          - name: score_rounded
-            data_type: number
-          - name: score_change
-            data_type: float
-          - name: review_count
-            data_type: number
-          - name: reviews_per_month
-            data_type: number
-          - name: last_reviewed
-            data_type: date
-          - name: awards
-            data_type: varchar
-          - name: vendors
-            data_type: varchar
-          - name: phone
-            data_type: varchar
-          - name: primary_email
-            data_type: varchar
-          - name: direct_emails
-            data_type: varchar
-          - name: generic_emails
-            data_type: varchar
-
-      - name: menu_items
-        columns:
-          - name: menu_item_id
-            data_type: varchar
-          - name: establishment_id
-            data_type: varchar
-          - name: menu_id
-            data_type: varchar
-          - name: name
-            data_type: varchar
-          - name: category
-            data_type: varchar
-          - name: flags
-            data_type: varchar
-          - name: description
-            data_type: varchar
-          - name: observed_at
-            data_type: date
-          - name: price
-            data_type: number
-          - name: source
-            data_type: varchar
-          - name: is_current
-            data_type: boolean
 
       - name: menus
+        description: "Menu records linked to establishments."
         columns:
-          - name: menu_id
-            data_type: varchar
+        - name: menu_id
+          data_tests:
+              - not_null
+              - unique
+
+      - name: menu_items
+        description: "Menu item records. Filter to IS_CURRENT IS NOT NULL — the majority of rows have no usable data outside that filter."
+        columns:
+          - name: menu_item_id
+            data_tests:
+              - not_null
           - name: establishment_id
-            data_type: varchar
-          - name: observations
-            data_type: variant
-          - name: last_observed_at
-            data_type: date
-          - name: source
-            data_type: varchar
-          - name: url
-            data_type: varchar
-          - name: menu_item_price_median
-            data_type: number
-          - name: menu_item_price_20th_percentile
-            data_type: number
-          - name: menu_item_price_80th_percentile
-            data_type: number
-          - name: is_current
-            data_type: boolean
+            data_tests:
+              - not_null
+          - name: menu_id
+            data_tests:
+              - not_null
+
+
+      - name: entities
+        description: "Business entity records. Type, category, and name are fully populated."
 
       - name: ratings
-        columns:
-          - name: unique_id
-            data_type: varchar
-          - name: establishment_id
-            data_type: varchar
-          - name: link
-            data_type: varchar
-          - name: source
-            data_type: varchar
-          - name: seen
-            data_type: date
-          - name: is_current
-            data_type: boolean
-          - name: score
-            data_type: float
-          - name: review_count
-            data_type: number
-          - name: post_count
-            data_type: number
-          - name: likes
-            data_type: number
-          - name: followers
-            data_type: number
-          - name: followings
-            data_type: number
-          - name: checkins
-            data_type: number
-          - name: awards
-            data_type: varchar
+        description: "Not used. Nearly all rows are masked with null values and contain no usable data."
 
       - name: technologies
-        columns:
-          - name: unique_id
-            data_type: varchar
-          - name: establishment_id
-            data_type: varchar
-          - name: name
-            data_type: varchar
-          - name: category
-            data_type: varchar
-          - name: subcategory
-            data_type: varchar
-          - name: link
-            data_type: varchar
-          - name: is_current
-            data_type: boolean
-          - name: first_observed_at
-            data_type: date
-          - name: last_observed_at
-            data_type: date
-          - name: observations
-            data_type: variant
+        description: "Not used. Nearly all rows are masked with null values and contain no usable data."
+
+      - name: contacts
+        description: "Business contact records. Name, email, and phone are fully populated. Cannot filter to active contacts — IS_CURRENT is unpopulated."

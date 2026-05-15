@@ -1,6 +1,6 @@
 with source as (
 
-    select * from {{ source('v02', 'establishments_open') }}
+    select * from {{ source('V02', 'establishments_open') }}
 ),
 
 renamed as (
@@ -11,10 +11,10 @@ renamed as (
         location_city as establishment_city,
         location_state_code as establishment_state_code,
         location_country_code as establishment_country_code,
+        location_zip as establishment_zip,
         location_metro_area as establishment_metro_area,
-        chain_name as establishment_chain_name,
-        review_count as establishment_review_count,
-        price_symbolic as establishment_price_rating
+        price_symbolic as establishment_price_rating,
+        status
     from source
 )
 
