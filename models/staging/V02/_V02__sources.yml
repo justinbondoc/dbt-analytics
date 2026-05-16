@@ -1,0 +1,74 @@
+version: 2
+
+sources:
+  - name: V02
+    database: food__beverage_establishment__menu_data
+    description: A sample of food and beverage data from Snowflake with some reliable data.
+    tables:
+      - name: establishments_open
+        description: "Open restaurant and business listings. Core fields are reliable. Cuisine and pricing have partial coverage."
+        columns:
+          - name: establishment_id
+            data_tests:
+              - not_null
+              - unique
+          - name: name
+            data_tests:
+              - not_null
+          - name: status
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['open']
+
+
+
+      - name: establishments_closed
+        description: "Closed restaurant and business listings."
+        columns:
+          - name: establishment_id
+            data_tests:
+              - not_null
+              - unique
+          - name: status
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['temporarily closed', 'possibly closed', 'permanently closed']
+
+
+      - name: menus
+        description: "Menu records linked to establishments."
+        columns:
+        - name: menu_id
+          data_tests:
+              - not_null
+              - unique
+
+      - name: menu_items
+        description: "Menu item records. Filter to IS_CURRENT IS NOT NULL — the majority of rows have no usable data outside that filter."
+        columns:
+          - name: menu_item_id
+            data_tests:
+              - not_null
+          - name: establishment_id
+            data_tests:
+              - not_null
+          - name: menu_id
+            data_tests:
+              - not_null
+
+
+      - name: entities
+        description: "Business entity records. Type, category, and name are fully populated."
+
+      - name: ratings
+        description: "Not used. Nearly all rows are masked with null values and contain no usable data."
+
+      - name: technologies
+        description: "Not used. Nearly all rows are masked with null values and contain no usable data."
+
+      - name: contacts
+        description: "Business contact records. Name, email, and phone are fully populated. Cannot filter to active contacts — IS_CURRENT is unpopulated."

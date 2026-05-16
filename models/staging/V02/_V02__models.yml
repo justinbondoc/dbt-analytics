@@ -1,0 +1,95 @@
+version: 2
+
+models:
+  - name: stg_V02__establishments_closed
+    description: Closed establishments from the V02 source.
+    columns:
+      - name: establishment_id
+        description: Primary key for the establishment.
+        tests:
+          - not_null
+          - unique
+      - name: establishment_name
+        description: Name of the establishment.
+      - name: establishment_city
+        description: City where the establishment is located.
+      - name: establishment_state_code
+        description: State code where the establishment is located.
+      - name: establishment_zip
+        description: ZIP code of the establishment.
+      - name: establishment_country_code
+        description: Country code of the establishment.
+      - name: status
+        description: Current status of the establishment.
+      - name: closed_date
+        description: Date the establishment closed.
+
+  - name: stg_V02__establishments_open
+    description: Open establishments from the V02 source.
+    columns:
+      - name: establishment_id
+        description: Primary key for the establishment.
+        tests:
+          - not_null
+          - unique
+      - name: establishment_name
+        description: Name of the establishment.
+      - name: establishment_score
+        description: Aggregate score or rating of the establishment.
+      - name: establishment_city
+        description: City where the establishment is located.
+      - name: establishment_state_code
+        description: State code where the establishment is located.
+      - name: establishment_country_code
+        description: Country code of the establishment.
+      - name: establishment_zip
+        description: ZIP code of the establishment.
+      - name: establishment_metro_area
+        description: Metro area the establishment belongs to.
+      - name: establishment_price_rating
+        description: Symbolic price tier of the establishment (e.g. $, $$, $$$).
+      - name: status
+        description: Current status of the establishment.
+
+  - name: stg_V02__menus
+    description: Menus associated with establishments from the V02 source.
+    columns:
+      - name: menu_id
+        description: Primary key for the menu.
+        tests:
+          - not_null
+          - unique
+      - name: establishment_id
+        description: Foreign key to the establishment that owns this menu.
+        tests:
+          - not_null
+      - name: is_current
+        description: Whether this menu is currently active.
+
+  - name: stg_V02__menu_items
+    description: Individual menu items associated with menus and establishments from the V02 source.
+    columns:
+      - name: menu_item_id
+        description: Primary key for the menu item.
+        tests:
+          - not_null
+      - name: establishment_id
+        description: Foreign key to the establishment this item belongs to.
+        tests:
+          - not_null
+      - name: menu_id
+        description: Foreign key to the menu this item belongs to.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_V02__menus')
+                field: menu_id
+      - name: menu_item_name
+        description: Name of the menu item.
+      - name: description
+        description: Description of the menu item.
+      - name: price
+        description: Price of the menu item.
+      - name: is_current
+        description: Whether this menu item is currently active.
