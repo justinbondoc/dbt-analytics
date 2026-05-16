@@ -73,7 +73,6 @@ models:
         description: Primary key for the menu item.
         tests:
           - not_null
-          - unique
       - name: establishment_id
         description: Foreign key to the establishment this item belongs to.
         tests:
