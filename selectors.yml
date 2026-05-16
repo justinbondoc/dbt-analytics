@@ -3,7 +3,7 @@
      description: >
        A default selector that will exclude materializing views
        without skipping tests on views.
-     default: true
+     default: false
      definition:
        union:
          - union: 
