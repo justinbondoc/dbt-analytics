@@ -13,7 +13,7 @@ renamed as (
         location_country_code as establishment_country_code,
         location_zip as establishment_zip,
         location_metro_area as establishment_metro_area,
-        price_symbolic as establishment_price_rating,
+        price_symbolic as establishment_price_symbolic,
         status
     from source
 )
