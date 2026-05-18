@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: int_establishments__overview
+    description: >
+      Combines open and closed establishments into a single unified view. Nulls out fields that are not applicable to closed establishments.
+    columns:
+      - name: establishment_id
+        description: Primary key for the establishment.
+        tests:
+          - not_null
+          - unique
+      - name: establishment_name
+        description: Name of the establishment.
+      - name: establishment_city
+        description: City where the establishment is located.
+      - name: establishment_state_code
+        description: State code where the establishment is located.
+      - name: establishment_zip
+        description: ZIP code of the establishment.
+      - name: establishment_country_code
+        description: Country code of the establishment.
+      - name: establishment_score
+        description: Aggregate score or rating. Null for closed establishments.
+      - name: establishment_metro_area
+        description: Metro area the establishment belongs to. Null for closed establishments.
+      - name: establishment_price_symbolic
+        description: Symbolic price tier (e.g. $, $$, $$$). Null for closed establishments.
+      - name: status
+        description: Current open/closed status of the establishment.
+        tests:
+          - not_null
+      - name: closed_date
+        description: Date the establishment closed. Null for open establishments.
+
+  - name: int_menu_items__aggregated
+    description: >
+      Aggregates current menu item pricing stats per establishment.
+      Only includes items and menus where is_current is true.
+    columns:
+      - name: establishment_id
+        description: Primary key and foreign key to int_establishments__overview.
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('int_establishments__overview')
+                field: establishment_id
+      - name: item_count
+        description: Count of current menu items for the establishment.
+        tests:
+          - not_null
+      - name: avg_price
+        description: Average price of current menu items, rounded to 2 decimal places.
+      - name: min_price
+        description: Lowest price among current menu items.
+      - name: max_price
+        description: Highest price among current menu items.
