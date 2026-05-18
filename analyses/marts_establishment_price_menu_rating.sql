@@ -17,12 +17,12 @@ places as (
 
     select
         establishment_id,
-        trim(establishment_price_rating) as price_tier,
+        trim(establishment_price_symbolic) as price_tier,
         establishment_score
 
     from {{ ref('stg_V02__establishments_open') }}
 
-    where trim(establishment_price_rating) in ('$', '$$', '$$$', '$$$$')
+    where trim(establishment_price_symbolic) in ('$', '$$', '$$$', '$$$$')
 
 ),
 

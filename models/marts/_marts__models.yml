@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_establishments
+    description: >
+      Final dimensional model combining establishment details with current menu pricing stats. The primary table for downstream reporting on establishments.
+    columns:
+      - name: establishment_id
+        description: Primary key for the establishment.
+        tests:
+          - not_null
+          - unique
+      - name: establishment_name
+        description: Name of the establishment.
+      - name: establishment_city
+        description: City where the establishment is located.
+      - name: establishment_state_code
+        description: State code where the establishment is located.
+      - name: status
+        description: Current open/closed status of the establishment.
+        tests:
+          - not_null
+      - name: item_count
+        description: Count of current menu items. Null if no menu data exists.
+      - name: avg_price
+        description: Average price of current menu items. Null if no menu data exists.
+      - name: min_price
+        description: Lowest price among current menu items. Null if no menu data exists.
+      - name: max_price
+        description: Highest price among current menu items. Null if no menu data exists.
