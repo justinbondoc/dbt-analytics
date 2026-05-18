@@ -2,8 +2,7 @@ version: 2
 
 models:
   - name: int_establishments__overview
-    description: >
-      Combines open and closed establishments into a single unified view. Nulls out fields that are not applicable to closed establishments.
+    description: Combines open and closed establishments into a single unified view. Nulls out fields that are not applicable to closed establishments.
     columns:
       - name: establishment_id
         description: Primary key for the establishment.
@@ -34,9 +33,7 @@ models:
         description: Date the establishment closed. Null for open establishments.
 
   - name: int_menu_items__aggregated
-    description: >
-      Aggregates current menu item pricing stats per establishment.
-      Only includes items and menus where is_current is true.
+    description: Aggregates current menu item pricing stats per establishment. Only includes items and menus where is_current is true.
     columns:
       - name: establishment_id
         description: Primary key and foreign key to int_establishments__overview.
