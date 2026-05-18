@@ -15,7 +15,7 @@ SELECT
     establishment_country_code,
     establishment_score,
     establishment_metro_area,
-    establishment_price_rating,
+    establishment_price_symbolic,
     status,
     NULL AS closed_date
 FROM establishments_open
@@ -31,7 +31,7 @@ SELECT
     establishment_country_code,
     NULL AS establishment_score,
     NULL AS establishment_metro_area,
-    NULL AS establishment_price_rating,
+    NULL AS establishment_price_symbolic,
     status,
     closed_date
 FROM establishments_closed
