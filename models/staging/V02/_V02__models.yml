@@ -46,7 +46,7 @@ models:
         description: ZIP code of the establishment.
       - name: establishment_metro_area
         description: Metro area the establishment belongs to.
-      - name: establishment_price_rating
+      - name: establishment_price_symbolic
         description: Symbolic price tier of the establishment (e.g. $, $$, $$$).
       - name: status
         description: Current status of the establishment.

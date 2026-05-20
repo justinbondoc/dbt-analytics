@@ -1,37 +1,49 @@
-WITH establishments_open AS (
-    SELECT * FROM {{ ref('stg_V02__establishments_open') }}
+with
+
+establishments_open as (
+
+    select * from {{ ref('stg_V02__establishments_open') }}
+
 ),
 
-establishments_closed AS (
-    SELECT * FROM {{ ref('stg_V02__establishments_closed') }}
+establishments_closed as (
+
+    select * from {{ ref('stg_V02__establishments_closed') }}
+
+),
+
+final as (
+
+    select
+        establishment_id,
+        establishment_name,
+        establishment_city,
+        establishment_state_code,
+        establishment_zip,
+        establishment_country_code,
+        establishment_score,
+        establishment_metro_area,
+        establishment_price_symbolic,
+        status,
+        null as closed_date
+    from establishments_open
+
+    union all
+
+    select
+        establishment_id,
+        establishment_name,
+        establishment_city,
+        establishment_state_code,
+        establishment_zip,
+        establishment_country_code,
+        null as establishment_score,
+        null as establishment_metro_area,
+        null as establishment_price_symbolic,
+        status,
+        closed_date
+    from establishments_closed
+
 )
 
-SELECT
-    establishment_id,
-    establishment_name,
-    establishment_city,
-    establishment_state_code,
-    establishment_zip,
-    establishment_country_code,
-    establishment_score,
-    establishment_metro_area,
-    establishment_price_symbolic,
-    status,
-    NULL AS closed_date
-FROM establishments_open
-
-UNION ALL
-
-SELECT
-    establishment_id,
-    establishment_name,
-    establishment_city,
-    establishment_state_code,
-    establishment_zip,
-    establishment_country_code,
-    NULL AS establishment_score,
-    NULL AS establishment_metro_area,
-    NULL AS establishment_price_symbolic,
-    status,
-    closed_date
-FROM establishments_closed
+select * from final
